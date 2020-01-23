@@ -1,2 +1,2 @@
 # DeepScrapper
-A very deeps crapper for DeepDeals
+A very deep scrapper for DeepDeals
