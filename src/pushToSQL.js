@@ -30,10 +30,6 @@ const pushToSQL = async (deals) => {
             type: Sequelize.STRING,
             allowNull: false
         },
-        Price: {
-            type: Sequelize.FLOAT,
-            allowNull: true
-        },
         indirectPrice: {
             type: Sequelize.FLOAT,
             allowNull: true
@@ -52,6 +48,7 @@ const pushToSQL = async (deals) => {
         }
     });
     //populate SQL database
+    await table.sync({force: true});
     await table.bulkCreate(deals)
     sequelize.close()
 };
