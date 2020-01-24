@@ -52,6 +52,7 @@ const pushToSQL = async (deals) => {
         }
     });
     //populate SQL database
+    await table.sync({ force: true })
     await table.bulkCreate(deals)
     sequelize.close()
 };

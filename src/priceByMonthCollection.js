@@ -29,7 +29,6 @@ const priceByMonth = function (date) {
                         deals.push(deal);
                     };
                 };
-                console.log(deals)
                 resolve(deals);
             } else {
                 reject({
@@ -59,13 +58,14 @@ const arrayToMonth = new Map([
 ])
 
 const priceByMonthCollection = Array.from(Array(12).keys())
-priceByMonthCollection.map((element, index) => {
+priceByMonthCollection.map(async (element, index) => {
     let d = new Date()
     d.setMonth(d.getMonth() + index);
     let month = arrayToMonth.get(d.getMonth())
     let year = (d.getFullYear()).toString()
     let date = year + '-' + month;
-    element = priceByMonth(date);
+    element = await priceByMonth(date);
+    return element;
 })
 
 
