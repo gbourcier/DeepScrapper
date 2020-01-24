@@ -1,7 +1,7 @@
 const pushToSQL = require('./src/pushToSQL');
 const priceByMonthCollection = require('./src/priceByMonthCollection');
 
-(async () => {
+exports.handler = async function (event) {
     try {
         const deals = await priceByMonthCollection();
         console.log(deals.flat(Infinity));
@@ -10,4 +10,4 @@ const priceByMonthCollection = require('./src/priceByMonthCollection');
     } catch (e) {
         console.log(e);
     };
-})();
+}
