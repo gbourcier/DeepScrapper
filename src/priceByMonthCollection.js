@@ -1,5 +1,4 @@
 const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-const pushToSQL = require('./pushToSQL');
 
 const priceByMonth = function (date) {
     const token = 'FmlkztLL2diS02WK7tS2-w';
@@ -56,17 +55,19 @@ const arrayToMonth = new Map([
     [10, '11'],
     [11, '12']
 ])
+const priceByMonthCollection = async () => {
+    const makePriceByMonthCollection = Array.from(Array(12).keys()).map(async (element, index) => {
+        let d = new Date()
+        d.setMonth(d.getMonth() + index);
+        let month = arrayToMonth.get(d.getMonth())
+        let year = (d.getFullYear()).toString()
+        let date = year + '-' + month;
+        element = await priceByMonth(date);
+        return element;
+    })
+    return makePriceByMonthCollection
+}
 
-const priceByMonthCollection = Array.from(Array(12).keys())
-priceByMonthCollection.map(async (element, index) => {
-    let d = new Date()
-    d.setMonth(d.getMonth() + index);
-    let month = arrayToMonth.get(d.getMonth())
-    let year = (d.getFullYear()).toString()
-    let date = year + '-' + month;
-    element = await priceByMonth(date);
-    return element;
-})
 
 
 module.exports = priceByMonthCollection;

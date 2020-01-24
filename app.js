@@ -4,9 +4,10 @@ const priceByMonthCollection = require('./src/priceByMonthCollection');
 (async () => {
     try {
         const deals = await priceByMonthCollection();
-        await pushToSQL(deals.flat(Infinity));
+        console.log(deals);
+        await pushToSQL(deals);
         console.log('Pushed deals to SQL');
     } catch (e) {
-        console.log('An error occured');
+        console.log(e);
     };
 })();
