@@ -40,7 +40,6 @@ const priceByMonth = function (date) {
         xmlHttp.send();
     })
 };
-
 const arrayToMonth = new Map([
     [0, '01'],
     [1, '02'],
@@ -56,18 +55,17 @@ const arrayToMonth = new Map([
     [11, '12']
 ])
 const priceByMonthCollection = async () => {
-    const makePriceByMonthCollection = Array.from(Array(12).keys()).map(async (element, index) => {
+    const dealsArray = []
+    for (let i = 0; i < 12; i++) {
         let d = new Date()
-        d.setMonth(d.getMonth() + index);
+        d.setMonth(d.getMonth() + i);
         let month = arrayToMonth.get(d.getMonth())
         let year = (d.getFullYear()).toString()
         let date = year + '-' + month;
         element = await priceByMonth(date);
-        return element;
-    })
-    return makePriceByMonthCollection
+        dealsArray.push(element);
+        console.log('pushed array '+i);
+    }
+    return dealsArray.flat(Infinity);
 }
-
-
-
 module.exports = priceByMonthCollection;
