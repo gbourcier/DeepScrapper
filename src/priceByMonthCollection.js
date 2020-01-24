@@ -1,47 +1,5 @@
 const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-
-// (function (d) {
-//     var mL = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-//     var mS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
-
-//     d.prototype.getLongMonth = d.getLongMonth = function getLongMonth(inMonth) {
-//         return gM.call(this, inMonth, mL);
-//     }
-
-//     d.prototype.getShortMonth = d.getShortMonth = function getShortMonth(inMonth) {
-//         return gM.call(this, inMonth, mS);
-//     }
-
-//     function gM(inMonth, arr) {
-//         var m;
-
-//         if (this instanceof d) {
-//             m = this.getMonth();
-//         }
-//         else if (typeof inMonth !== 'undefined') {
-//             m = parseInt(inMonth, 10) - 1; // Subtract 1 to start January at zero
-//         }
-
-//         return arr[m];
-//     }
-// })(Date);
-
-// const today = new Date()
-
-// const monthToArray = new Map([
-//     ['01', 0],
-//     ['02', 1],
-//     ['03', 2],
-//     ['04', 3],
-//     ['05', 4],
-//     ['06', 5],
-//     ['07', 6],
-//     ['08', 7],
-//     ['09', 8],
-//     ['10', 9],
-//     ['11', 10],
-//     ['12', 11]
-// ]);
+const pushToSQL = require('./pushToSQL');
 
 const priceByMonth = function (date) {
     const token = 'FmlkztLL2diS02WK7tS2-w';
@@ -110,4 +68,5 @@ priceByMonthCollection.map((element, index) => {
     element = priceByMonth(date);
 })
 
-console.log(priceByMonthCollection);
+
+module.exports = priceByMonthCollection;
