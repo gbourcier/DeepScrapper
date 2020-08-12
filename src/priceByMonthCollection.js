@@ -1,15 +1,12 @@
 const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-const UserAgent = require('user-agents');
 
 const priceByMonth = function (date) {
-    const apikey = '8aa374f4e28e4664bf268f850f767535';
-    const token = '-qE8wqDXAgeM8dXOn2gvzw';
-    const format = 'json';
-    const url = 'https://www.skyscanner.ca/g/browseservice/dataservices/browse/v3/bvweb/CA/CAD/en-US/destinations/YUL/anywhere/' + date + '/' + date + '/?profile=minimalcityrollupwithnamesv2&include=image;holiday;hotel;adverts&apikey=' + apikey;
-    const encodedUrl = encodeURIComponent(url);
-    const reqUrl = 'https://api.proxycrawl.com/?token=' + token + '&url=' + encodedUrl + '&format=' + format
+    // const token = 'FmlkztLL2diS02WK7tS2-w';
+    // const format = 'json';
+    const reqUrl = 'https://www.skyscanner.ca/g/browseservice/dataservices/browse/v3/bvweb/CA/CAD/en-US/destinations/YUL/anywhere/' + date + '/' + date + '/?profile=minimalcityrollupwithnamesv2&include=image;holiday;hotel;adverts&apikey=8aa374f4e28e4664bf268f850f767535'
+    // const encodedUrl = encodeURIComponent(url);
+    // const reqUrl = 'https://api.proxycrawl.com/?token=' + token + '&url=' + encodedUrl + '&format=' + format
     const xmlHttp = new XMLHttpRequest(reqUrl);
-    const userAgent = new UserAgent({ deviceCategory: 'desktop' });
     return new Promise((resolve, reject) => {
         let deals = [];
         let today = new Date();
@@ -39,8 +36,7 @@ const priceByMonth = function (date) {
                 });
             };
         }
-        xmlHttp.open("GET", url, true);
-        xmlHttp.setRequestHeader('User-Agent', userAgent.userAgent);
+        xmlHttp.open("GET", reqUrl, true);
         xmlHttp.send();
     })
 };
@@ -68,8 +64,8 @@ const priceByMonthCollection = async () => {
         let date = year + '-' + month;
         element = await priceByMonth(date);
         dealsArray.push(element);
-        console.log('Pushed array '+i);
+        console.log('pushed array '+i);
     }
-    return dealsArray;
+    return dealsArray.flat(Infinity);
 }
 module.exports = priceByMonthCollection;
